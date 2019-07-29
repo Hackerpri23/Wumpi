@@ -17,6 +17,7 @@
       <v-spacer />
       <v-toolbar-title class="display-1" v-text="title" />
       <v-spacer />
+      <v-btn color="green" depressed href="/auth">Login</v-btn>
     </v-app-bar>
     <v-content>
       <v-container>

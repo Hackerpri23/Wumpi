@@ -15,6 +15,20 @@ export default {
         hid: "description",
         name: "description",
         content: process.env.npm_package_description || ""
+      },
+      { property: "og:title", content: "Wumpi" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "http://locahost:3000/" },
+      { property: "og:url", content: "https://d3203a0d.ngrok.io" },
+      {
+        property: "og:image",
+        content:
+          "https://cdn.discordapp.com/avatars/592568340485111827/33e085785f711d89ea67a37cc93fdeaf.png"
+      },
+      {
+        property: "og:description",
+        content:
+          "Full suite of moderation. Easing the life of moderators everywhere."
       }
     ],
     link: [
@@ -22,6 +36,11 @@ export default {
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css?family=Material+Icons"
+      },
+      {
+        href:
+          "https://fonts.googleapis.com/css?family=Montserrat+Alternates:100,300,400,500,700,900&display=swap",
+        rel: "stylesheet"
       }
     ]
   },
