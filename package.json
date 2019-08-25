@@ -1,27 +1,41 @@
 {
   "name": "wumpi",
-  "version": "0.1.17b",
-  "authors": "Alex, Edqe, Snow, Lean, Leon",
-  "main": "index.js",
+  "version": "0.1.17",
   "description": "The goal of this bot is to provide a full suite of moderation commands and functions. The bot not only will be available to make a moderators life easier, but automate as much as it can. This extends to new member scans and anti bot players. It also allows for automating the muting of spammers, swearing, racial slurs, and raiding. This will improve the overall security of your server. It also includes a backup function which will keep a 24/7 backup of your server.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex5219/Wumpi.git"
+  },
   "keywords": [
     "Management"
   ],
+  "author": "Alex",
+  "contributors": [
+    "Leon",
+    "Edqe",
+    "Snow"
+  ],
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "bootstrap": "^4.3.1",
-    "cleverbot-node": "^0.3.11",
-    "cleverbot.io": "^1.0.4",
-    "cookies": "^0.7.3",
-    "disco-oauth": "^2.9.1",
-    "discord.js": "^11.5.1",
-    "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
-    "mongoose": "^5.5.12",
-    "ms": "latest",
-    "canvas": "^2.5.0"
+    "bufferutil": "^4.0.1",
+    "common-tags": "^1.8.0",
+    "cookie-parser": "~1.4.4",
+    "disco-oauth": "^3.0.2",
+    "discord.js": "github:discordjs/discord.js#master",
+    "dotenv": "^8.1.0",
+    "express": "~4.16.1",
+    "klasa": "github:dirigeants/klasa#v1.0.0-alpha",
+    "libsodium-wrappers": "^0.7.5",
+    "mongodb": "^3.3.1",
+    "morgan": "~1.9.1",
+    "ms": "^2.1.2"
   },
-  "scripts": {
-    "start": "node src/wumpi.js"
-  }
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheDrone7/Wumpi/issues"
+  },
+  "homepage": "https://github.com/TheDrone7/Wumpi#readme"
 }
