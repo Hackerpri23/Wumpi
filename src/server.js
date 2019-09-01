@@ -1,18 +1,18 @@
-var app = require('./app');
-var http = require('http');
-require('./bot/wumpi');
+const app = require('./app');
+const http = require('http');
+require('./wumpi');
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     return val;
@@ -30,7 +30,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   switch (error.code) {
     case 'EACCES':
@@ -47,7 +47,7 @@ function onError(error) {
 }
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   console.log('Server is ready and is now listening on ' + bind);
 }

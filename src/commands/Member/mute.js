@@ -1,5 +1,5 @@
-const {Command} = require('klasa');
-const {MessageEmbed} = require('discord.js');
+const { Command } = require('klasa');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = class extends Command {
   constructor(...props) {
@@ -20,7 +20,7 @@ module.exports = class extends Command {
     let muteRole = await msg.guild.roles.find(r => r.name.toLowerCase().indexOf('muted') > -1);
 
     if (!muteRole) {
-      let role = await msg.guild['createRole']({name: 'Muted'});
+      let role = await msg.guild['createRole']({ name: 'Muted' });
       await msg.guild.channels.forEach(gc =>
         gc['overwritePermissions'](role, {
           SEND_MESSAGES: false,

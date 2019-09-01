@@ -1,5 +1,5 @@
 const {KlasaClient, PermissionLevels} = require('klasa');
-const {token} = require('../../config');
+const {token} = require('../config');
 
 let Wumpi = new KlasaClient({
   fetchAllMembers: true,

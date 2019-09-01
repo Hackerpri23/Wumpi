@@ -1,11 +1,13 @@
 // Copyright (c) 2017-2019 dirigeants. All rights reserved. MIT license.
-const {Provider, util: {mergeDefault, mergeObjects, isObject}} = require('klasa');
-const {MongoClient: Mongo} = require('mongodb');
+const {
+  Provider,
+  util: { mergeDefault, mergeObjects, isObject }
+} = require('klasa');
+const { MongoClient: Mongo } = require('mongodb');
 
 module.exports = class extends Provider {
-
   constructor(...args) {
-    super(...args, {description: 'Allows use of MongoDB functionality throughout Klasa'});
+    super(...args, { description: 'Allows use of MongoDB functionality throughout Klasa' });
     this.db = null;
   }
 
@@ -16,23 +18,29 @@ module.exports = class extends Provider {
   /* Table methods */
 
   async init() {
-    const connection = mergeDefault({
-      conString: `mongodb://127.0.0.1:27017/klasa`
-    }, this.client.options.providers.mongodb);
+    const connection = mergeDefault(
+      {
+        conString: `mongodb://127.0.0.1:27017/klasa`
+      },
+      this.client.options.providers.mongodb
+    );
 
     // If full connection string is provided, use that, otherwise fall back to individual parameters
     const connectionString = connection.conString;
 
     const mongoClient = await Mongo.connect(
       connectionString,
-      mergeObjects(connection.options, {useNewUrlParser: true, useUnifiedTopology: true})
+      mergeObjects(connection.options, { useNewUrlParser: true, useUnifiedTopology: true })
     );
 
     this.db = mongoClient.db(connection.db);
   }
 
   hasTable(table) {
-    return this.db.listCollections().toArray().then(collections => collections.some(col => col.name === table));
+    return this.db
+      .listCollections()
+      .toArray()
+      .then(collections => collections.some(col => col.name === table));
   }
 
   createTable(table) {
@@ -46,12 +54,22 @@ module.exports = class extends Provider {
   /* Document methods */
 
   getAll(table, filter = []) {
-    if (filter.length) return this.db.collection(table).find({id: {$in: filter}}, {_id: 0}).toArray();
-    return this.db.collection(table).find({}, {_id: 0}).toArray();
+    if (filter.length)
+      return this.db
+        .collection(table)
+        .find({ id: { $in: filter } }, { _id: 0 })
+        .toArray();
+    return this.db
+      .collection(table)
+      .find({}, { _id: 0 })
+      .toArray();
   }
 
   getKeys(table) {
-    return this.db.collection(table).find({}, {id: 1, _id: 0}).toArray();
+    return this.db
+      .collection(table)
+      .find({}, { id: 1, _id: 0 })
+      .toArray();
   }
 
   get(table, id) {
@@ -63,7 +81,7 @@ module.exports = class extends Provider {
   }
 
   getRandom(table) {
-    return this.db.collection(table).aggregate({$sample: {size: 1}});
+    return this.db.collection(table).aggregate({ $sample: { size: 1 } });
   }
 
   create(table, id, doc = {}) {
@@ -75,16 +93,17 @@ module.exports = class extends Provider {
   }
 
   update(table, id, doc) {
-    return this.db.collection(table).updateOne(resolveQuery(id), {$set: isObject(doc) ? flatten(doc) : parseEngineInput(doc)});
+    return this.db
+      .collection(table)
+      .updateOne(resolveQuery(id), { $set: isObject(doc) ? flatten(doc) : parseEngineInput(doc) });
   }
 
   replace(table, id, doc) {
     return this.db.collection(table).replaceOne(resolveQuery(id), this.parseUpdateInput(doc));
   }
-
 };
 
-const resolveQuery = query => isObject(query) ? query : {id: query};
+const resolveQuery = query => (isObject(query) ? query : { id: query });
 
 function flatten(obj, path = '') {
   let output = {};
@@ -96,5 +115,5 @@ function flatten(obj, path = '') {
 }
 
 function parseEngineInput(updated) {
-  return Object.assign({}, ...updated.map(entry => ({[entry.data[0]]: entry.data[1]})));
+  return Object.assign({}, ...updated.map(entry => ({ [entry.data[0]]: entry.data[1] })));
 }
