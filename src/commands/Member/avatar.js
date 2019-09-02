@@ -13,14 +13,16 @@ module.exports = class extends Command {
 
   run(message, [member]) {
     if (member)
-      return message.author
+      return message
         .sendMessage(member['user'].displayAvatarURL({ size: 2048 }))
-        .then(() => message.sendMessage(`Please check your DMs to see ${member['displayName']}'s avatar!`))
-        .catch(() => message.sendMessage("Couldn't send you the DM. Make sure you allow me to send DMs."));
+        .catch(() =>
+          message.sendMessage("Couldn't send you the avatar!\nPlease report this to my developers.\n\nThank you!")
+        );
     else
       return message.author
         .sendMessage(message.author.displayAvatarURL({ size: 2048 }))
-        .then(() => message.sendMessage(`Please check your DMs to see your avatar!`))
-        .catch(() => message.sendMessage("Couldn't send you the DM. Make sure you allow me to send DMs."));
+        .catch(() =>
+          message.sendMessage("Couldn't send you the avatar!\nPlease report this to my developers.\n\nThank you!")
+        );
   }
 };

@@ -1,5 +1,5 @@
-const {Command} = require('klasa');
-const {MessageEmbed} = require('discord.js');
+const { Command } = require('klasa');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = class extends Command {
   constructor(...args) {
@@ -12,17 +12,18 @@ module.exports = class extends Command {
       usage: '<User:member> [reason:string]',
       usageDelim: ' '
     });
-
-    this.customizeResponse('User', 'You need to mention the user to be kicked.');
   }
 
   async run(message, [member, reason]) {
     if (!message.guild.me.hasPermission('KICK_MEMBERS'))
       return message.sendMessage('Sorry, but I need the `KICK MEMBERS` permission to execute this command.');
     if (!reason) reason = 'Not specified.';
-    await member['kick']({reason});
+    await member['send'](
+      `You were kicked from **${message.guild.name}** by \`${message.author.username}\` for the following reason: \`\`\`${reason}\`\`\``
+    ).catch();
+    await member['kick']({ reason });
     return message.sendMessage(
-      new MessageEmbed({footer: {icon_url: message.author.displayAvatarURL()}})
+      new MessageEmbed({ footer: { icon_url: message.author.displayAvatarURL() } })
         .setTitle('MEMBER KICKED')
         .setTimestamp()
         .setColor('ORANGE')

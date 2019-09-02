@@ -1,4 +1,4 @@
-const {Event} = require('klasa');
+const { Event } = require('klasa');
 
 module.exports = class extends Event {
   constructor(...args) {
@@ -12,9 +12,7 @@ module.exports = class extends Event {
   run = async () => {
     setInterval(() => {
       this.client.user.setActivity(
-        `${this.client.users.size} Users | ${
-          this.client.options['prefix']
-        }${this.client.commands
+        `${this.client.users.size} Users | ${this.client.options['prefix']}${this.client.commands
           .filter(c => c.permissionLevel !== 10)
           .randomKey()}`,
         {

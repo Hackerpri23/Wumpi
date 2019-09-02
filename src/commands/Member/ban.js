@@ -1,5 +1,5 @@
-const {Command} = require('klasa');
-const {MessageEmbed} = require('discord.js');
+const { Command } = require('klasa');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = class extends Command {
   constructor(...args) {
@@ -20,9 +20,12 @@ module.exports = class extends Command {
     if (!message.guild.me.hasPermission('BAN_MEMBERS'))
       return message.sendMessage('Sorry, but I need the `BAN MEMBERS` permission to execute this command.');
     if (!reason) reason = 'Not specified.';
-    await member['ban']({reason});
+    await member['send'](
+      `You were banned in **${message.guild.name} by \`${message.author.username}\` for the following reason:\`\`\`${reason}\`\`\``
+    ).catch();
+    await member['ban']({ reason });
     return message.sendMessage(
-      new MessageEmbed({footer: {icon_url: message.author.displayAvatarURL()}})
+      new MessageEmbed({ footer: { icon_url: message.author.displayAvatarURL() } })
         .setTitle('MEMBER BANNED')
         .setTimestamp()
         .setColor('RED')

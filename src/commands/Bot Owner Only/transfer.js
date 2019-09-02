@@ -1,6 +1,6 @@
-const {Command} = require('klasa');
+const { Command } = require('klasa');
 const fs = require('fs-nextra');
-const {resolve, join} = require('path');
+const { resolve, join } = require('path');
 
 module.exports = class extends Command {
   constructor(...args) {

@@ -1,5 +1,5 @@
-const {Command, Stopwatch, Type, util} = require('klasa');
-const {inspect} = require('util');
+const { Command, Stopwatch, Type, util } = require('klasa');
+const { inspect } = require('util');
 
 module.exports = class extends Command {
   constructor(...args) {
@@ -15,7 +15,7 @@ module.exports = class extends Command {
   }
 
   async run(message, [code]) {
-    const {success, result, time, type} = await this.evaluate(message, code);
+    const { success, result, time, type } = await this.evaluate(message, code);
     const footer = util.codeBlock('ts', type);
     const output = message.language.get(
       success ? 'COMMAND_EVAL_OUTPUT' : 'COMMAND_EVAL_ERROR',
@@ -46,7 +46,7 @@ module.exports = class extends Command {
   // Eval the input
   async evaluate(message, code) {
     // eslint-disable-next-line no-unused-vars
-    const {flags} = message;
+    const { flags } = message;
     code = code.replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
     const stopwatch = new Stopwatch();
     let success, syncTime, asyncTime, result;

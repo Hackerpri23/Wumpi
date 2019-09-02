@@ -31,7 +31,8 @@
     "libsodium-wrappers": "^0.7.5",
     "mongodb": "^3.3.1",
     "morgan": "~1.9.1",
-    "ms": "^2.1.2"
+    "ms": "^2.1.2",
+    "npm": "^6.11.2"
   },
   "license": "ISC",
   "bugs": {
