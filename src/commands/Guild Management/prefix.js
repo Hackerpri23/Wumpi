@@ -6,7 +6,7 @@ module.exports = class extends Command {
       description: "Changes the bot's prefix for the guild.",
       runIn: ['text'],
       permissionLevel: 8,
-      usage: '<prefix:string>',
+      usage: '[prefix:string]',
       usageDelim: ' ',
       aliases: ['command-prefix'],
       autoAliases: true
@@ -14,7 +14,11 @@ module.exports = class extends Command {
   }
 
   async run(msg, [prefix]) {
-    await msg.guild.settings.update('prefix', prefix);
-    return await msg.reply(`The bot's prefix in **${msg.guild.name.toUpperCase()}** has been changed to \`${prefix}\``);
+    if(prefix){
+      await msg.guild.settings.update('prefix', prefix);
+      return await msg.reply(`The bot's prefix in **${msg.guild.name.toUpperCase()}** has been changed to \`${prefix}\``);
+    }
+    else
+      return await msg.reply(`The bot's prefix in **${msg.guild.name.toUpperCase()}** is \`${msg.guildSettings['prefix']}\``)
   }
 };
