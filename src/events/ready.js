@@ -12,7 +12,7 @@ module.exports = class extends Event {
   run = async () => {
     setInterval(() => {
       this.client.user.setActivity(
-        `${this.client.users.size} Users | ${this.client.options['prefix']}${this.client.commands
+        `${this.client.users.size} Users | @${this.client.user.username}#${this.client.user.discriminator} ${this.client.commands
           .filter(c => c.permissionLevel !== 10)
           .randomKey()}`,
         {
