@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = class extends Command {
   constructor(...props) {
     super(...props, {
-      usage: '<user:member> [reason:string]',
+      usage: '<user:member> [reason:reason]',
       usageDelim: ' ',
       aliases: ['no-chat'],
       autoAliases: true,
@@ -16,7 +16,6 @@ module.exports = class extends Command {
   async run(msg, [user, reason]) {
     if (!msg.guild.me.hasPermission('MANAGE_ROLES'))
       return msg.sendMessage(`Sorry, but I need the \`MANAGE ROLES\` permission to execute this command`);
-    if (!reason) reason = 'NOT SPECIFIED!';
     let muteRole = await msg.guild.roles.find(r => r.name.toLowerCase().indexOf('muted') > -1);
 
     if (!muteRole) {

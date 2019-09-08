@@ -1,6 +1,9 @@
 const { KlasaClient, PermissionLevels } = require('klasa');
 const { token } = require('../config');
 
+KlasaClient.defaultGuildSchema.add('lockdown', 'boolean', {default: true, configurable: true});
+KlasaClient.defaultGuildSchema.add('locktime', 'number', {configurable: true});
+
 let Wumpi = new KlasaClient({
   fetchAllMembers: true,
   prefix: '-',

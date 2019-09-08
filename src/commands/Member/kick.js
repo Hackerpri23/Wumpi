@@ -9,7 +9,7 @@ module.exports = class extends Command {
       permissionLevel: 1,
       runIn: ['text'],
       description: 'Kicks the mentioned user.',
-      usage: '<User:member> [reason:string]',
+      usage: '<User:member> [reason:reason]',
       usageDelim: ' '
     });
   }
@@ -17,7 +17,6 @@ module.exports = class extends Command {
   async run(message, [member, reason]) {
     if (!message.guild.me.hasPermission('KICK_MEMBERS'))
       return message.sendMessage('Sorry, but I need the `KICK MEMBERS` permission to execute this command.');
-    if (!reason) reason = 'Not specified.';
     await member['send'](
       `You were kicked from **${message.guild.name}** by \`${message.author.username}\` for the following reason: \`\`\`${reason}\`\`\``
     ).catch();

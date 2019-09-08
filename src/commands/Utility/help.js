@@ -47,8 +47,8 @@ module.exports = class extends Command {
       }
       helpEmbed.addField(
         'Format',
-        `\`\`\`${message.guildSettings['prefix'] ||
-          this.client.options['prefix'] + command['name'].toLowerCase()} ${command['usage'].parsedUsage
+        `\`\`\`${(message.guildSettings['prefix'] ||
+          this.client.options['prefix']) + command['name'].toLowerCase()} ${command['usage'].parsedUsage
           .map(
             tag =>
               (tag.required === 2 ? '<' : '[') +
