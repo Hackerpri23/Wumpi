@@ -10,16 +10,14 @@ module.exports = class extends Command {
       requiredPermissions: ['BAN_MEMBERS'],
       runIn: ['text'],
       description: 'Bans the mentioned user.',
-      usage: '<User:member> [reason:string]',
+      usage: '<User:member> [reason:reason]',
       usageDelim: ' '
     });
-    this.customizeResponse('User', 'You need to mention the user to be banned.');
   }
 
   async run(message, [member, reason]) {
     if (!message.guild.me.hasPermission('BAN_MEMBERS'))
       return message.sendMessage('Sorry, but I need the `BAN MEMBERS` permission to execute this command.');
-    if (!reason) reason = 'Not specified.';
     await member['send'](
       `You were banned in **${message.guild.name} by \`${message.author.username}\` for the following reason:\`\`\`${reason}\`\`\``
     ).catch();

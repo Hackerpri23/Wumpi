@@ -8,7 +8,7 @@ module.exports = class extends Command {
       aliases: ['clean', 'prune', 'purge'],
       runIn: ['text'],
       permissionLevel: 3,
-      description: 'Cleans the specified number of messages in the channel (Or as many as it can if not specified).'
+      description: 'Cleans the specified number of messages in the channel.'
     });
 
     this.createCustomResolver(

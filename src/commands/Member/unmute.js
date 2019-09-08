@@ -13,10 +13,9 @@ module.exports = class extends Command {
     });
   }
 
-  async run(msg, [user, reason]) {
+  async run(msg, [user]) {
     if (!msg.guild.me.hasPermission('MANAGE_ROLES'))
       return msg.sendMessage(`Sorry, but I need the \`MANAGE ROLES\` permission to execute this command`);
-    if (!reason) reason = 'NOT SPECIFIED!';
     let muteRole = await msg.guild.roles.find(r => r.name.toLowerCase().indexOf('muted') > -1);
 
     if (!muteRole || !user['roles'].find(r => r.name.toLowerCase().includes('muted')))

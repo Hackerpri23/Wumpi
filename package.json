@@ -27,7 +27,7 @@
     "discord.js": "github:discordjs/discord.js#master",
     "dotenv": "^8.1.0",
     "express": "~4.16.1",
-    "klasa": "github:dirigeants/klasa#v1.0.0-alpha",
+    "klasa": "github:dirigeants/klasa#settings",
     "libsodium-wrappers": "^0.7.5",
     "mongodb": "^3.3.1",
     "morgan": "~1.9.1",

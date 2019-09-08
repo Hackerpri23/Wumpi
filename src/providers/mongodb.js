@@ -1,4 +1,3 @@
-// Copyright (c) 2017-2019 dirigeants. All rights reserved. MIT license.
 const {
   Provider,
   util: { mergeDefault, mergeObjects, isObject }
@@ -20,7 +19,7 @@ module.exports = class extends Provider {
   async init() {
     const connection = mergeDefault(
       {
-        conString: `mongodb://127.0.0.1:27017/klasa`
+        conString: `mongodb://127.0.0.1:27017/WumpiDB`
       },
       this.client.options.providers.mongodb
     );
