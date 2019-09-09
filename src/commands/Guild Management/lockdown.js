@@ -27,25 +27,22 @@ module.exports = class extends Command {
       return await msg.reply('I need the `ADMINISTRATOR` permission to execute this command.');
     if (msg.guildSettings.get('lockdown')) {
       await this.removeLockDown(msg.guild);
-      return await msg.reply('The lockdown has ended!');
+      await msg.reply('The lockdown has ended!');
+      return await msg.delete({timeout: 5000});
     } else {
       await this.enterLockDown(msg, reason, ms(duration));
-      return await msg.reply('The guild has entered lockdown mode!');
+      await msg.reply('The guild has entered lockdown mode!');
+      return await msg.delete({timeout: 5000});
     }
   }
 
   async removeLockDown(guild) {
-    await guild.channels.forEach(c => {
-      c.overwritePermissions({
-        permissionOverwrites: [
-          {
-            id: guild.id,
-            allow: ['SEND_MESSAGES', 'SPEAK']
-          }
-        ],
-        reason: 'Ending lock-down mode!'
+    for (const c of guild.channels) {
+      await c.updateOverwrite(guild.id, {
+        SEND_MESSAGES: true,
+        SPEAK: true
       });
-    });
+    }
     let lockChannel = await guild.channels.find(c => c.name.toLowerCase().includes('lockdown'));
     lockChannel ? await lockChannel.delete() : undefined;
     await guild.settings.update('lockdown', false, {throwOnError: true});
@@ -53,17 +50,12 @@ module.exports = class extends Command {
   }
 
   async enterLockDown(msg, reason, duration) {
-    await msg.guild.channels.forEach(c => {
-      c.overwritePermissions({
-        permissionOverwrites: [
-          {
-            id: msg.guild.id,
-            deny: ['SEND_MESSAGES', 'SPEAK']
-          }
-        ],
-        reason: 'Entering lock-down mode!'
+    for (const c of msg.guild){
+      await  c.updateOverwrite(msg.guild.id, {
+        SEND_MESSAGES: false,
+        SPEAK: false
       });
-    });
+    }
     let lockChannel = await msg.guild.channels.create('lockdown', {
       position: 0,
       permissionOverwrites: [

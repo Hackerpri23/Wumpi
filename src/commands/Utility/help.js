@@ -65,7 +65,7 @@ module.exports = class extends Command {
     const categories = Object.keys(help);
     const helpMessage = [];
     for (let cat = 0; cat < categories.length; cat++) {
-      helpMessage.push(`**${categories[cat]} Commands**:`, '```asciidoc');
+      helpMessage.push(`**${categories[cat]}**:`, '```asciidoc');
       const subCategories = Object.keys(help[categories[cat]]);
       for (let subCat = 0; subCat < subCategories.length; subCat++)
         helpMessage.push(`${help[categories[cat]][subCategories[subCat]].join('\n')}\n`);
@@ -87,7 +87,7 @@ module.exports = class extends Command {
   async buildHelp(message) {
     const help = {};
 
-    const { prefix } = message.guildSettings;
+    const prefix = message.guildSettings.get('prefix') || this.client.options['prefix'];
     const commandNames = [...this.client.commands.keys()];
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
 

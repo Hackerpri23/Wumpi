@@ -10,15 +10,8 @@ module.exports = class extends Event {
   }
 
   run = async () => {
-    setInterval(() => {
-      this.client.user.setActivity(
-        `${this.client.users.size} Users | @${this.client.user.username}#${this.client.user.discriminator} ${this.client.commands
-          .filter(c => c.permissionLevel !== 10)
-          .randomKey()}`,
-        {
-          type: 'LISTENING'
-        }
-      );
-    }, 30000);
+    await this.client.schedule.clear();
+    await this.client.schedule.create('updatePresence', '*/1 * * * *');
+    await this.client.schedule.create('checkLock', '*/5 * * * *');
   };
 };

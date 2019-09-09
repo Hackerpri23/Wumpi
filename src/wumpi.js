@@ -1,8 +1,10 @@
 const { KlasaClient, PermissionLevels } = require('klasa');
 const { token } = require('../config');
 
-KlasaClient.defaultGuildSchema.add('lockdown', 'boolean', {default: true, configurable: true});
-KlasaClient.defaultGuildSchema.add('locktime', 'number', {configurable: true});
+KlasaClient.defaultGuildSchema
+  .add('lockdown', 'boolean', {default: true, configurable: true})
+  .add('locktime', 'number', {configurable: true})
+  .add('supportRole', '');
 
 let Wumpi = new KlasaClient({
   fetchAllMembers: true,
@@ -10,7 +12,10 @@ let Wumpi = new KlasaClient({
   createPiecesFolders: false,
   disabledCorePieces: ['languages', 'commands'],
   providers: {
-    default: 'mongodb'
+    default: 'mongodb',
+    mongodb: {
+      connectionString: 'mongodb://127.0.0.1:27017/klasa'
+    }
   },
   gateways: {
     guilds: { provider: 'mongodb' },
