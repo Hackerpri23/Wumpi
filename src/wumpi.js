@@ -10,7 +10,10 @@ let Wumpi = new KlasaClient({
   createPiecesFolders: false,
   disabledCorePieces: ['languages', 'commands'],
   providers: {
-    default: 'mongodb'
+    default: 'mongodb',
+    mongodb: {
+      connectionString: 'mongodb://127.0.0.1:27017/klasa'
+    }
   },
   gateways: {
     guilds: { provider: 'mongodb' },
